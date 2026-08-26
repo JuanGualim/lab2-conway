@@ -31,6 +31,14 @@ impl Framebuffer {
         self.background_color = color;
     }
 
+    pub fn background_color(&self) -> u32 {
+        self.background_color
+    }
+
+    pub fn current_color(&self) -> u32 {
+        self.current_color
+    }
+
     pub fn point(&mut self, x: usize, y: usize) {
         if x < self.width && y < self.height {
             let index = y * self.width + x;

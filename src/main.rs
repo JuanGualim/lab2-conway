@@ -1,6 +1,8 @@
 mod framebuffer;
+mod conway;
 
 use framebuffer::Framebuffer;
+use conway::count_neighbors;
 use minifb::{Key, Window, WindowOptions};
 
 const WIDTH: usize = 100;
@@ -15,13 +17,27 @@ fn main() {
     framebuffer.set_current_color(0xFFFF00);
 
     // Algunos puntos de prueba
+    framebuffer.point(49, 50);
     framebuffer.point(50, 50);
     framebuffer.point(51, 50);
-    framebuffer.point(52, 50);
 
-    framebuffer.point(50, 51);
-    framebuffer.point(50, 52);
+    //framebuffer.point(50, 51);
+    //framebuffer.point(50, 52);
 
+    println!(
+        "Vecinos de (50, 50): {}",
+        count_neighbors(&framebuffer, 50, 50)
+    );
+
+    println!(
+        "Vecinos de (50, 49): {}",
+        count_neighbors(&framebuffer, 50, 49)
+    );
+
+    println!(
+        "Vecinos de (49, 50): {}",
+        count_neighbors(&framebuffer, 49, 50)
+    );
     println!(
         "Color (50,50): {:?}",
         framebuffer.get_color(50, 50)
