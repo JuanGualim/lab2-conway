@@ -94,3 +94,43 @@ pub fn draw_pattern(
         framebuffer.point(start_x + dx, start_y + dy);
     }
 }
+
+pub fn initialize_world(framebuffer: &mut Framebuffer) {
+    framebuffer.clear();
+
+    // -----------------------------
+    // Still Lifes
+    // -----------------------------
+    draw_pattern(framebuffer, BLOCK, 8, 8);
+    draw_pattern(framebuffer, BEEHIVE, 25, 8);
+
+    draw_pattern(framebuffer, BLOCK, 75, 8);
+    draw_pattern(framebuffer, BEEHIVE, 88, 20);
+
+    // -----------------------------
+    // Oscillators
+    // -----------------------------
+    draw_pattern(framebuffer, BLINKER, 45, 8);
+    draw_pattern(framebuffer, TOAD, 58, 12);
+    draw_pattern(framebuffer, BEACON, 72, 25);
+
+    draw_pattern(framebuffer, BLINKER, 15, 30);
+    draw_pattern(framebuffer, TOAD, 30, 32);
+    draw_pattern(framebuffer, BEACON, 50, 28);
+
+    // -----------------------------
+    // Spaceships
+    // -----------------------------
+    draw_pattern(framebuffer, GLIDER, 8, 50);
+    draw_pattern(framebuffer, GLIDER, 25, 55);
+    draw_pattern(framebuffer, GLIDER, 75, 55);
+
+    draw_pattern(framebuffer, LWSS, 10, 75);
+    draw_pattern(framebuffer, LWSS, 65, 78);
+
+    // -----------------------------
+    // Osciladores grandes
+    // -----------------------------
+    draw_pattern(framebuffer, PULSAR, 40, 45);
+    draw_pattern(framebuffer, PULSAR, 80, 75);
+}
