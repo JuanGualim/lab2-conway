@@ -91,46 +91,78 @@ pub fn draw_pattern(
     start_y: usize,
 ) {
     for &(dx, dy) in pattern {
-        framebuffer.point(start_x + dx, start_y + dy);
+        let x = (start_x + dx) % framebuffer.width;
+        let y = (start_y + dy) % framebuffer.height;
+
+        framebuffer.point(x, y);
     }
 }
-
 pub fn initialize_world(framebuffer: &mut Framebuffer) {
     framebuffer.clear();
 
-    // -----------------------------
-    // Still Lifes
-    // -----------------------------
-    draw_pattern(framebuffer, BLOCK, 8, 8);
-    draw_pattern(framebuffer, BEEHIVE, 25, 8);
+    // =========================================================
+    // ZONA SUPERIOR
+    // =========================================================
 
-    draw_pattern(framebuffer, BLOCK, 75, 8);
-    draw_pattern(framebuffer, BEEHIVE, 88, 20);
+    // Glider con bastante espacio para desplazarse.
+    draw_pattern(framebuffer, GLIDER, 5, 5);
 
-    // -----------------------------
-    // Oscillators
-    // -----------------------------
-    draw_pattern(framebuffer, BLINKER, 45, 8);
-    draw_pattern(framebuffer, TOAD, 58, 12);
-    draw_pattern(framebuffer, BEACON, 72, 25);
+    // Still lifes.
+    draw_pattern(framebuffer, BLOCK, 40, 7);
+    draw_pattern(framebuffer, BEEHIVE, 70, 8);
 
-    draw_pattern(framebuffer, BLINKER, 15, 30);
-    draw_pattern(framebuffer, TOAD, 30, 32);
-    draw_pattern(framebuffer, BEACON, 50, 28);
+    // Osciladores.
+    draw_pattern(framebuffer, BLINKER, 20, 18);
+    draw_pattern(framebuffer, TOAD, 50, 17);
+    draw_pattern(framebuffer, BEACON, 85, 18);
 
-    // -----------------------------
-    // Spaceships
-    // -----------------------------
-    draw_pattern(framebuffer, GLIDER, 8, 50);
-    draw_pattern(framebuffer, GLIDER, 25, 55);
-    draw_pattern(framebuffer, GLIDER, 75, 55);
+    // =========================================================
+    // ZONA MEDIA SUPERIOR
+    // =========================================================
 
-    draw_pattern(framebuffer, LWSS, 10, 75);
-    draw_pattern(framebuffer, LWSS, 65, 78);
+    // Spaceship horizontal.
+    draw_pattern(framebuffer, LWSS, 5, 30);
 
-    // -----------------------------
-    // Osciladores grandes
-    // -----------------------------
-    draw_pattern(framebuffer, PULSAR, 40, 45);
-    draw_pattern(framebuffer, PULSAR, 80, 75);
+    // Algunos organismos estáticos/osciladores.
+    draw_pattern(framebuffer, BLOCK, 30, 30);
+    draw_pattern(framebuffer, BEEHIVE, 70, 30);
+
+    // =========================================================
+    // ZONA CENTRAL
+    // =========================================================
+
+    // Pulsar como pieza central de la simulación.
+    draw_pattern(framebuffer, PULSAR, 43, 42);
+
+    // Osciladores alrededor, pero suficientemente separados.
+    draw_pattern(framebuffer, BLINKER, 20, 48);
+    draw_pattern(framebuffer, BEACON, 75, 45);
+
+    // =========================================================
+    // ZONA MEDIA INFERIOR
+    // =========================================================
+
+    // Segundo Glider.
+    draw_pattern(framebuffer, GLIDER, 68, 62);
+
+    // Still lifes.
+    draw_pattern(framebuffer, BLOCK, 15, 65);
+    draw_pattern(framebuffer, BEEHIVE, 40, 68);
+
+    // Oscilador.
+    draw_pattern(framebuffer, TOAD, 85, 68);
+
+    // =========================================================
+    // ZONA INFERIOR
+    // =========================================================
+
+    // Segundo LWSS.
+    draw_pattern(framebuffer, LWSS, 8, 82);
+
+    // Tercer Glider.
+    draw_pattern(framebuffer, GLIDER, 48, 82);
+
+    // Otros organismos para llenar la parte inferior.
+    draw_pattern(framebuffer, BEACON, 72, 84);
+    draw_pattern(framebuffer, BLINKER, 92, 85);
 }
