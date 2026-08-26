@@ -48,3 +48,42 @@ pub fn count_neighbors(
 
     count
 }
+
+pub fn next_generation(framebuffer: &mut Framebuffer) {
+    let width = framebuffer.width;
+    let height = framebuffer.height;
+
+    let alive_color = framebuffer.current_color();
+    let dead_color = framebuffer.background_color();
+
+    // Aquí almacenamos la siguiente generación.
+    let mut next_buffer = vec![dead_color; width * height];
+
+    for y in 0..height {
+        for x in 0..width {
+            let alive = is_alive(framebuffer, x, y);
+            let neighbors = count_neighbors(framebuffer, x, y);
+
+            let next_alive = match (alive, neighbors) {
+                // Célula viva con 2 o 3 vecinos: sobrevive.
+                (true, 2) | (true, 3) => true,
+
+                // Célula muerta con exactamente 3 vecinos: nace.
+                (false, 3) => true,
+
+                // Cualquier otro caso: muere o permanece muerta.
+                _ => false,
+            };
+
+            let index = y * width + x;
+
+            next_buffer[index] = if next_alive {
+                alive_color
+            } else {
+                dead_color
+            };
+        }
+    }
+
+    framebuffer.buffer = next_buffer;
+}
