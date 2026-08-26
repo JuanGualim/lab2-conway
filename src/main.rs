@@ -1,9 +1,20 @@
 mod framebuffer;
 mod conway;
+mod patterns;
 
 use framebuffer::Framebuffer;
 use conway::next_generation;
-
+use patterns::{
+    draw_pattern,
+    BLOCK,
+    BEEHIVE,
+    BLINKER,
+    TOAD,
+    BEACON,
+    GLIDER,
+    LWSS,
+    PULSAR,
+};
 use minifb::{Key, Window, WindowOptions};
 use std::time::{Duration, Instant};
 
@@ -19,13 +30,21 @@ fn main() {
 
     framebuffer.set_current_color(0xFFFF00);
 
-    // -----------------------------
-    // Patrón inicial: Blinker
-    // -----------------------------
+    // Still lifes
+    draw_pattern(&mut framebuffer, BLOCK, 10, 10);
+    draw_pattern(&mut framebuffer, BEEHIVE, 25, 10);
 
-    framebuffer.point(49, 50);
-    framebuffer.point(50, 50);
-    framebuffer.point(51, 50);
+    // Oscillators
+    draw_pattern(&mut framebuffer, BLINKER, 45, 10);
+    draw_pattern(&mut framebuffer, TOAD, 60, 10);
+    draw_pattern(&mut framebuffer, BEACON, 80, 10);
+
+    // Spaceships
+    draw_pattern(&mut framebuffer, GLIDER, 10, 40);
+    draw_pattern(&mut framebuffer, LWSS, 30, 40);
+
+    // Oscilador grande
+    draw_pattern(&mut framebuffer, PULSAR, 60, 50);
 
     // -----------------------------
     // Ventana
